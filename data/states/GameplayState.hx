@@ -1267,32 +1267,6 @@ function updateNightTime(elapsed:Float):Bool
     return false;
 }
 
-function playVentSound()
-{
-    var currentVentLocation:String = '';
-
-    for (anim in animManager.animatronics)
-    {
-        if (anim.camera == 'cam05' || anim.camera == 'cam06' || anim.camera == 'leftvent' || anim.camera == 'rightvent')
-        {
-            currentVentLocation = anim.camera;
-            break;
-        }
-    }
-
-    if (currentVentLocation != '' && currentVentLocation != lastVentLocation)
-    {
-        ventSound.play();
-    }
-
-    if (currentVentLocation == '' && lastVentLocation != '')
-    {
-        ventSound.play();
-    }
-
-    lastVentLocation = currentVentLocation;
-}
-
 function playBalloonBoySound()
 {
     for (anim in animManager.animatronics)
