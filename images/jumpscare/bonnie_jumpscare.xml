@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="bonnie_jumpscare.png">
-	<!-- Created using the Spritesheet and XML generator -->
-	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
-	<SubTexture name="jumpscare0000" x="2093" y="1544" width="500" height="502" frameX="-254" frameY="-268" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare0001" x="1571" y="1544" width="522" height="572" frameX="-241" frameY="-198" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare0002" x="1028" y="1544" width="543" height="614" frameX="-231" frameY="-156" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare0003" x="586" y="2185" width="602" height="685" frameX="-194" frameY="-85" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare0004" x="3084" y="0" width="464" height="772" frameX="-263" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare0005" x="0" y="2185" width="586" height="772" frameX="-204" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare0006" x="2056" y="728" width="947" height="725" frameX="-37" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare0007" x="0" y="1544" width="1028" height="641" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare0008" x="2056" y="0" width="1028" height="728" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare0009" x="1028" y="0" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare0010" x="1028" y="772" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare0011" x="0" y="0" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare_loop0000" x="0" y="772" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Heroic Packer v0.1.5 https://heroicpacker.heroeyad.dev/
+-->
+<TextureAtlas imagePath="bonnie_jumpscare.png" width="1811" height="4188" spritePadding="0" borderPadding="1">
+	<SubTexture name="jumpscare0000" x="1129" y="3689" width="496" height="498" frameX="-256" frameY="-270" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare0001" x="1" y="3619" width="518" height="568" frameX="-243" frameY="-200" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare0002" x="519" y="3619" width="610" height="539" rotated="true" frameX="-233" frameY="-158" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare0003" x="1129" y="3091" width="681" height="598" rotated="true" frameX="-196" frameY="-87" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare0004" x="1025" y="2631" width="768" height="460" rotated="true" frameX="-265" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare0005" x="1025" y="2049" width="768" height="582" rotated="true" frameX="-206" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare0006" x="1" y="2898" width="943" height="721" frameX="-39" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare0007" x="1" y="2261" width="1024" height="637" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare0008" x="1" y="1537" width="1024" height="724" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare0009" x="1" y="1" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare0010" x="1025" y="1" width="768" height="1024" rotated="true" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare0011" x="1" y="769" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare_loop0000" x="1025" y="1025" width="768" height="1024" rotated="true" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
 </TextureAtlas>

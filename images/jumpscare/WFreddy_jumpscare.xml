@@ -1,24 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="WFreddy_jumpscare.png">
-	<!-- Created using the Spritesheet and XML generator -->
-	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
-	<SubTexture name="jumpscare0000" x="3414" y="772" width="132" height="772" frameX="-894" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare0001" x="3084" y="1544" width="184" height="772" frameX="-842" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare0002" x="3084" y="772" width="330" height="772" frameX="-696" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare0003" x="3084" y="0" width="512" height="772" frameX="-514" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare0004" x="1969" y="1544" width="749" height="772" frameX="-277" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare0005" x="1028" y="1544" width="941" height="772" frameX="-85" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare_loop0000" x="0" y="0" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare_loop0001" x="0" y="772" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare_loop0002" x="0" y="1544" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare_loop0003" x="1028" y="772" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare_loop0004" x="2056" y="0" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare_loop0005" x="2056" y="772" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare_loop0006" x="1028" y="0" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare_loop0007" x="2056" y="772" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare_loop0008" x="2056" y="0" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare_loop0009" x="1028" y="772" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare_loop0010" x="0" y="1544" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare_loop0011" x="0" y="772" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="jumpscare_loop0012" x="0" y="0" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Heroic Packer v0.1.5 https://heroicpacker.heroeyad.dev/
+-->
+<TextureAtlas imagePath="WFreddy_jumpscare.png" width="5035" height="1538" spritePadding="0" borderPadding="1">
+	<SubTexture name="jumpscare0000" x="4832" y="769" width="128" height="768" frameX="-896" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare0001" x="4652" y="769" width="180" height="768" frameX="-844" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare0002" x="4326" y="769" width="326" height="768" frameX="-698" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare0003" x="3818" y="769" width="508" height="768" frameX="-516" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare0004" x="3073" y="769" width="745" height="768" frameX="-279" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare0005" x="4097" y="1" width="937" height="768" frameX="-87" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare_loop0000" x="1" y="1" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare_loop0001" x="1025" y="1" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare_loop0002" x="2049" y="1" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare_loop0003" x="3073" y="1" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare_loop0004" x="1" y="769" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare_loop0005" x="1025" y="769" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare_loop0006" x="2049" y="769" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare_loop0007" x="1025" y="769" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare_loop0008" x="1" y="769" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare_loop0009" x="3073" y="1" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare_loop0010" x="2049" y="1" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare_loop0011" x="1025" y="1" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="jumpscare_loop0012" x="1" y="1" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
 </TextureAtlas>

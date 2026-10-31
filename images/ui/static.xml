@@ -1,23 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="static.png">
-	<!-- Created using the Spritesheet and XML generator -->
-	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
-	<SubTexture name="frame0000" x="2056" y="2316" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="frame0001" x="0" y="2316" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="frame0002" x="2056" y="1544" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="frame0003" x="1028" y="0" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="frame0004" x="1028" y="2316" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="frame0005" x="0" y="0" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="frame0006" x="2056" y="0" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="frame0007" x="3084" y="0" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="frame0008" x="1028" y="772" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="frame0009" x="2056" y="772" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="frame0010" x="1028" y="1544" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="frame0011" x="3084" y="772" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="frame0012" x="0" y="1544" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="frame0013" x="3084" y="1544" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="puppet10000" x="0" y="3088" width="292" height="754" frameX="-355" frameY="-8" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="puppet20000" x="3665" y="2316" width="423" height="671" frameX="-306" frameY="-99" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="puppet30000" x="3084" y="2316" width="581" height="704" frameX="-224" frameY="-66" frameWidth="1024" frameHeight="768"/>
-	<SubTexture name="puppet40000" x="0" y="772" width="1028" height="772" frameX="2" frameY="2" frameWidth="1024" frameHeight="768"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Heroic Packer v0.1.5 https://heroicpacker.heroeyad.dev/
+-->
+<TextureAtlas imagePath="static.png" width="1794" height="7265" spritePadding="0" borderPadding="1">
+	<SubTexture name="frame0000" x="1" y="1" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="frame0001" x="1" y="769" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="frame0002" x="1025" y="1" width="768" height="1024" rotated="true" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="frame0003" x="1025" y="1025" width="768" height="1024" rotated="true" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="frame0004" x="1" y="1537" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="frame0005" x="1025" y="2049" width="768" height="1024" rotated="true" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="frame0006" x="1" y="2305" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="frame0007" x="1" y="3073" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="frame0008" x="1025" y="3073" width="768" height="1024" rotated="true" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="frame0009" x="1" y="3841" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="frame0010" x="1025" y="4097" width="768" height="1024" rotated="true" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="frame0011" x="1" y="4609" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="frame0012" x="1025" y="5121" width="768" height="1024" rotated="true" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="frame0013" x="1" y="5377" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="puppet10000" x="1" y="6913" width="750" height="288" rotated="true" frameX="-357" frameY="-10" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="puppet20000" x="1025" y="6845" width="667" height="419" rotated="true" frameX="-308" frameY="-101" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="puppet30000" x="1025" y="6145" width="577" height="700" frameX="-226" frameY="-68" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="puppet40000" x="1" y="6145" width="1024" height="768" frameX="0" frameY="0" frameWidth="1024" frameHeight="768"/>
 </TextureAtlas>

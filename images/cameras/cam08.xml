@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="cam08.png">
-	<!-- Created using the Spritesheet and XML generator -->
-	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
-	<SubTexture name="secret_flash0000" x="0" y="2316" width="1604" height="772" frameX="2" frameY="2" frameWidth="1600" frameHeight="768"/>
-	<SubTexture name="WFoxy_flash0000" x="0" y="0" width="1604" height="772" frameX="2" frameY="2" frameWidth="1600" frameHeight="768"/>
-	<SubTexture name="default_flash0000" x="1604" y="1544" width="1604" height="772" frameX="2" frameY="2" frameWidth="1600" frameHeight="768"/>
-	<SubTexture name="WChicaWFreddy_flash0000" x="0" y="1544" width="1604" height="772" frameX="2" frameY="2" frameWidth="1600" frameHeight="768"/>
-	<SubTexture name="WFreddy_flash0000" x="0" y="772" width="1604" height="772" frameX="2" frameY="2" frameWidth="1600" frameHeight="768"/>
-	<SubTexture name="default_static0000" x="1604" y="0" width="1604" height="772" frameX="2" frameY="2" frameWidth="1600" frameHeight="768"/>
-	<SubTexture name="WChicaWBonnieWFreddy_flash0000" x="1604" y="772" width="1604" height="772" frameX="2" frameY="2" frameWidth="1600" frameHeight="768"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Heroic Packer v0.1.5 https://heroicpacker.heroeyad.dev/
+-->
+<TextureAtlas imagePath="cam08.png" width="1602" height="5378" spritePadding="0" borderPadding="1">
+	<SubTexture name="secret_flash0000" x="1" y="4609" width="1600" height="768" frameX="0" frameY="0" frameWidth="1600" frameHeight="768"/>
+	<SubTexture name="WFoxy_flash0000" x="1" y="1537" width="1600" height="768" frameX="0" frameY="0" frameWidth="1600" frameHeight="768"/>
+	<SubTexture name="default_flash0000" x="1" y="3073" width="1600" height="768" frameX="0" frameY="0" frameWidth="1600" frameHeight="768"/>
+	<SubTexture name="WChicaWFreddy_flash0000" x="1" y="769" width="1600" height="768" frameX="0" frameY="0" frameWidth="1600" frameHeight="768"/>
+	<SubTexture name="WFreddy_flash0000" x="1" y="2305" width="1600" height="768" frameX="0" frameY="0" frameWidth="1600" frameHeight="768"/>
+	<SubTexture name="default_static0000" x="1" y="3841" width="1600" height="768" frameX="0" frameY="0" frameWidth="1600" frameHeight="768"/>
+	<SubTexture name="WChicaWBonnieWFreddy_flash0000" x="1" y="1" width="1600" height="768" frameX="0" frameY="0" frameWidth="1600" frameHeight="768"/>
 </TextureAtlas>

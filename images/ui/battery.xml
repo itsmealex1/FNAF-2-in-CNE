@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="flashlight.png">
-	<!-- Created using the Spritesheet and XML generator -->
-	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
-	<SubTexture name="40000" x="0" y="0" width="95" height="51" frameX="-7" frameY="-1" frameWidth="100" frameHeight="50"/>
-	<SubTexture name="30000" x="0" y="102" width="95" height="51" frameX="-7" frameY="-1" frameWidth="100" frameHeight="50"/>
-	<SubTexture name="20000" x="95" y="0" width="95" height="51" frameX="-7" frameY="-1" frameWidth="100" frameHeight="50"/>
-	<SubTexture name="10000" x="0" y="51" width="95" height="51" frameX="-7" frameY="-1" frameWidth="100" frameHeight="50"/>
-	<SubTexture name="00000" x="95" y="51" width="95" height="51" frameX="-7" frameY="-1" frameWidth="100" frameHeight="50"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Heroic Packer v0.1.5 https://heroicpacker.heroeyad.dev/
+-->
+<TextureAtlas imagePath="battery.png" width="237" height="93" spritePadding="0" borderPadding="1">
+	<SubTexture name="40000" x="189" y="1" width="47" height="91" rotated="true" frameX="-9" frameY="-3" frameWidth="100" frameHeight="50"/>
+	<SubTexture name="30000" x="142" y="1" width="47" height="91" rotated="true" frameX="-9" frameY="-3" frameWidth="100" frameHeight="50"/>
+	<SubTexture name="20000" x="95" y="1" width="47" height="91" rotated="true" frameX="-9" frameY="-3" frameWidth="100" frameHeight="50"/>
+	<SubTexture name="10000" x="48" y="1" width="47" height="91" rotated="true" frameX="-9" frameY="-3" frameWidth="100" frameHeight="50"/>
+	<SubTexture name="00000" x="1" y="1" width="47" height="91" rotated="true" frameX="-9" frameY="-3" frameWidth="100" frameHeight="50"/>
 </TextureAtlas>
