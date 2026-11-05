@@ -532,7 +532,7 @@ class AnimatronicManager
 
         if (anim.name == 'mangle')
         {
-            FlxG.sound.play(Paths.soundRandom('metalwalk', 1, 4), volume, false);
+            FlxG.sound.play(Paths.soundRandom('metalwalk', 2, 4), volume, false);
             return;
         }
 
