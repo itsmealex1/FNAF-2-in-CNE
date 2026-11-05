@@ -1759,7 +1759,7 @@ function update(elapsed:Float)
 
     if (hallwayLight)
     {
-        animManager.flashWitheredFoxy(nightNumber, elapsed);
+        animManager.flashWitheredFoxy(nightNumber);
     }
 
     if (flashlight.battery > 0)
