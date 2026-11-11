@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Heroic Packer v0.1.6 https://heroicpacker.heroeyad.dev/
+-->
+<TextureAtlas imagePath="overlay.png" width="749" height="380" spritePadding="0" borderPadding="1">
+	<SubTexture name="flash" x="250" y="1" width="249" height="378" frameX="0" frameY="0" frameWidth="249" frameHeight="378"/>
+	<SubTexture name="flash blocked" x="1" y="1" width="249" height="378" frameX="0" frameY="0" frameWidth="249" frameHeight="378"/>
+	<SubTexture name="normal" x="499" y="1" width="249" height="378" frameX="0" frameY="0" frameWidth="249" frameHeight="378"/>
+</TextureAtlas>
