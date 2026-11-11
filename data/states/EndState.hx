@@ -35,7 +35,7 @@ function create()
 
 function update(elapsed:Float)
 {
-    if (FlxG.keys.justPressed.ENTER && canPressEnter)
+    if (FlxG.keys.justPressed.ENTER || FlxG.mouse.justPressed && canPressEnter)
     {    
         fade();
     }

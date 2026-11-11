@@ -210,7 +210,7 @@ function playRandomTitleAnimation()
 
 function update(elapsed:Float)
 {
-    if (FlxG.keys.justPressed.ENTER && selectedNewGame && canSkip)
+    if (FlxG.keys.justPressed.ENTER || FlxG.mouse.justPressed && selectedNewGame && canSkip)
     {
         transitionTmr.cancel();
 
