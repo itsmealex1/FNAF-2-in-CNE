@@ -28,6 +28,8 @@ class Office extends FunkinSprite
     public var leftVentAnimatronic:FunkinSprite;
     public var rightVentAnimatronic:FunkinSprite;
 
+    public var overlay:FunkinSprite;
+
     var graphicPaths:Array<String> = [
         'office/office_static',
         'office/office_leftvent',
@@ -144,6 +146,13 @@ class Office extends FunkinSprite
             sprite.antialiasing = true;
         }
 
+        overlay = new FunkinSprite(-288, 0);
+        overlay.frames = Paths.getSparrowAtlas('office/overlay');
+        for (anims in ['flash', 'flash blocked', 'normal'])
+            overlay.animation.addByPrefix(anims, anims, 1, false);
+        overlay.animation.play('normal', true);
+        overlay.antialiasing = true;
+
         antialiasing = true;
 
         for (sprite in [officeAnimatronic, leftVentView, rightVentView, leftVentAnimatronic, rightVentAnimatronic, toyFreddy, goldenFreddy, balloonBoy, mangleOffice, desk])
@@ -185,6 +194,9 @@ class Office extends FunkinSprite
 
         state.add(mangleOffice);
         state.add(paperpal);
+
+        if (isMobile)
+            state.add(overlay);
     }
 
     var currentView:String = 'normal';
@@ -209,6 +221,13 @@ class Office extends FunkinSprite
         }
 
         currentView = view;
+
+        overlay.animation.play(switch (view)
+        {
+            case 'normal': 'normal';
+            case 'hallway': 'flash';
+            default: 'flash blocked';
+        }, true);
 
         visible = false;
         hallway.visible = false;

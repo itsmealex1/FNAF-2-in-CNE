@@ -151,7 +151,7 @@ class CameraSystem
             camName.animation.addByPrefix(name, name, 0, false);
         }
 
-        redButton = new FunkinSprite(49, 96, Paths.image('cameras/redButton'));
+        redButton = new FunkinSprite(49, isMobile ? 110 : 96, Paths.image('cameras/redButton'));
         redButton.antialiasing = true;
 
         signalInterruptedSprite = new FunkinSprite(341, 80, Paths.image('ui/signalInterrupted'));
@@ -211,12 +211,8 @@ class CameraSystem
 
     function getCameraAtlas(id:String)
     {
-        #if mobile
-        var mobileAtlas = Paths.getSparrowAtlas('cameras/' + id + '_mobile');
-
-        if (mobileAtlas != null)
-            return mobileAtlas;
-        #end
+        if (isMobile && Assets.exists('images/cameras/' + id + '_mobile.png'))
+            return Paths.getSparrowAtlas('cameras/' + id + '_mobile');
 
         return Paths.getSparrowAtlas('cameras/' + id);
     }

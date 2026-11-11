@@ -101,6 +101,9 @@ var bbInOffice:Bool = false;
 
 // idk 
 
+var crosshair:FunkinSprite;
+var crosshairBox:Funkinsprite;
+
 var holdFlashlightSprite:FunkinSprite;
 var holdFlashlightFrames:Int = 0;
 
@@ -432,13 +435,6 @@ function create()
     shadowBonnie.visible = false;
     add(shadowBonnie);
 
-    if (nightNumber == 1)
-    {
-        holdFlashlightSprite = new FunkinSprite(39, 672, Paths.image('ui/tutorial'));
-        holdFlashlightSprite.camera = camHUD;
-        add(holdFlashlightSprite);
-    }
-
     add(blackoutOverlay);
 
     flashlight.addToState(this);
@@ -450,6 +446,36 @@ function create()
 
     add(cameraButton.sprite);
     add(maskButton.sprite);
+
+    if (nightNumber == 1)
+    {
+        holdFlashlightSprite = new FunkinSprite(39, 672, Paths.image('ui/tutorial$mobilePrefix'));
+        holdFlashlightSprite.alpha = 0.5;
+        if (isMobile)
+        {
+            holdFlashlightSprite.x = 390;
+            holdFlashlightSprite.y = 300;
+        }
+        holdFlashlightSprite.camera = camHUD;
+        add(holdFlashlightSprite);
+    }
+
+    if (isMobile)
+    {
+        if (nightNumber == 1)
+        {
+            crosshairBox = new FunkinSprite(290, 145).makeSolid(401, 401, FlxColor.WHITE);
+            crosshairBox.alpha = 0.2;
+            crosshairBox.camera = camHUD;
+            add(crosshairBox);
+        }
+
+        crosshair = new FunkinSprite(0, 0, Paths.image('ui/crosshair'));
+        crosshair.alpha = 0.5;
+        crosshair.camera = camHUD;
+        crosshair.screenCenter();
+        add(crosshair);
+    }
 
     add(monitor.sprite);
     add(freddyMask.sprite);
@@ -504,6 +530,13 @@ function create()
 
                 office.jj.visible = false;
 
+                if (isMobile)
+                {
+                    crosshair.setPosition(-260, -50);
+                    crosshairBox.setPosition(29, 93);
+                    holdFlashlightSprite.setPosition(129, 263);
+                }
+
                 if (cameraPanelHovered)
                 {
                     maskButton.sprite.visible = false;
@@ -525,6 +558,7 @@ function create()
                 cameraSystem.setHUDVisible(true);
                 cameraSystem.setCamera(cameraSystem.lastViewedCamera);
                 cameraMap.selectCamera(cameraSystem.lastViewedCamera);
+                
                 
                 FlxTween.cancelTweensOf(blackoutOverlay);
                 blackoutOverlay.alpha = 0;
@@ -597,13 +631,14 @@ function create()
 
             freddyMask.onTakeOffComplete = function()
             {
-
                 if (flashlight.battery > 0)
                 {
                     flashlight.canFlicker = true;
                     flashlight.text.visible = true;
                 }
 
+                if (isMobile)
+                    crosshair.visible = true;
                 nightSprite.visible = true;
                 nightNumberSprite.visible = true;
                 amSprite.visible = true;
@@ -611,7 +646,11 @@ function create()
                 if (currentHour == 12)
                     hourTens.visible = true;
                 if (nightNumber == 1 && holdFlashlightFrames <= 100)
+                {
+                    if (isMobile)
+                        crosshairBox.visible = true;
                     holdFlashlightSprite.visible = true;
+                }
             };
 
             hideMaskButtonUntilLeave = true;
@@ -659,12 +698,17 @@ function create()
 
         freddyMask.putOn();
         flashlight.canFlicker = false;
-        for (sprite in [flashlight.sprite, flashlight.text, maskButton.sprite, cameraButton.sprite, nightSprite, nightNumberSprite, amSprite, hourOnes])
-            sprite.visible = false;
+        var sprites = [flashlight.sprite, flashlight.text, maskButton.sprite, cameraButton.sprite, nightSprite, nightNumberSprite, amSprite, hourOnes];
+        if (isMobile) sprites.push(crosshair);
+        for (sprite in sprites) sprite.visible = false;
         if (currentHour == 12)
             hourTens.visible = false;
         if (nightNumber == 1)
+        {
             holdFlashlightSprite.visible = false;
+            if (isMobile)
+                crosshairBox.visible = false;
+        }
     };
 
     maskButton.onLeave = function()
@@ -708,6 +752,15 @@ function pullMaskUp()
         amSprite.visible = true;
         hourOnes.visible = true;
 
+        if (isMobile)
+            crosshair.visible = true;
+        if (nightNumber == 1 && holdFlashlightFrames <= 100)
+        {
+            if (isMobile)
+                crosshairBox.visible = true;
+            holdFlashlightSprite.visible = true;
+        }
+
         if (currentHour == 12)
             hourTens.visible = true;
     };
@@ -724,6 +777,8 @@ function pullMaskUp()
     checkPendingJumpscare();
 }
 
+// 290 145
+// 390 300
 function dropCameras(forced:Bool = false)
 {
     if (!monitor.isOpen)
@@ -743,6 +798,13 @@ function dropCameras(forced:Bool = false)
     monitor.close();
     cameraSystem.setMonitorOpen(false);
     camFrozen = false;
+
+    if (isMobile)
+    {
+        crosshair.screenCenter();
+        crosshairBox.setPosition(290, 145);
+        holdFlashlightSprite.setPosition(390, 300);
+    }
 
     if (FlxG.random.int(1, 1000) == 1)
         office.jj.visible = true;
@@ -1531,12 +1593,13 @@ function update(elapsed:Float)
     if (updateNightTime(elapsed))
         return;
 
-    flashlight.update(FlxG.keys.pressed.CONTROL && !maskOn && !blackoutActive, elapsed);
+    var pressedCtrl:Bool = isMobile ? CoolUtil.mouseOverlaps(crosshairBox, camHUD) && FlxG.mouse.pressed : FlxG.keys.pressed.CONTROL;
+    flashlight.update(pressedCtrl && !maskOn && !blackoutActive, elapsed);
 
-    var flash = FlxG.keys.pressed.CONTROL && !blackoutActive && !maskOn && monitor.isOpen && flashlight.battery > 0;
-    var hallwayLight = FlxG.keys.pressed.CONTROL && !blackoutActive && !maskOn && !monitor.isOpen && flashlight.battery > 0;
+    var flash = pressedCtrl && !blackoutActive && !maskOn && monitor.isOpen && flashlight.battery > 0;
+    var hallwayLight = pressedCtrl && !blackoutActive && !maskOn && !monitor.isOpen && flashlight.battery > 0;
 
-    var flashlightInputActive = FlxG.keys.pressed.CONTROL && !blackoutActive && !maskOn;
+    var flashlightInputActive = pressedCtrl && !blackoutActive && !maskOn;
     var ventInputActive = heldVent != null && FlxG.mouse.pressed && heldVent.isMouseOver(camWorld) && !bbInOffice;
 
     var lightInputActive = flashlightInputActive || ventInputActive;
@@ -1548,7 +1611,10 @@ function update(elapsed:Float)
         {
             holdFlashlightFrames += 1;
             if (holdFlashlightFrames >= 100)
+            {
                 holdFlashlightSprite.visible = false;
+                crosshairBox.visible = false;
+            }
         }
     }
         
