@@ -203,6 +203,13 @@ class Office extends FunkinSprite
 
     public function setView(view:String, animManager:AnimatronicManager)
     {
+        overlay.animation.play(switch (view)
+        {
+            case 'normal': 'normal';
+            case 'hallway': 'flash';
+            default: 'flash blocked';
+        }, true);
+        
         if (currentView == view)
         {
             switch (view)
@@ -221,13 +228,6 @@ class Office extends FunkinSprite
         }
 
         currentView = view;
-
-        overlay.animation.play(switch (view)
-        {
-            case 'normal': 'normal';
-            case 'hallway': 'flash';
-            default: 'flash blocked';
-        }, true);
 
         visible = false;
         hallway.visible = false;

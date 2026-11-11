@@ -8,6 +8,7 @@ class OfficeButton
 
     public var onHover:Void->Void;
     public var onLeave:Void->Void;
+    public var onClick:Void->Void;
 
     public function new(image:String)
     {
@@ -18,7 +19,7 @@ class OfficeButton
 
     public function isMouseOver(cam:FlxCamera):Bool
         return sprite.overlapsPoint(FlxG.mouse.getWorldPosition(cam));
-    
+
     public function update(elapsed:Float, cam:FlxCamera)
     {
         if (cooldown > 0)
@@ -41,6 +42,12 @@ class OfficeButton
 
             if (onLeave != null)
                 onLeave();
+        }
+
+        if (over && FlxG.mouse.justPressed)
+        {
+            if (onClick != null)
+                onClick();
         }
     }
 }

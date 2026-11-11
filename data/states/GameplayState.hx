@@ -1,5 +1,3 @@
-import flixel.FlxCamera;
-
 import fnaf.VentLight;
 import fnaf.CameraButton;
 import fnaf.MaskButton;
@@ -108,6 +106,9 @@ var holdFlashlightSprite:FunkinSprite;
 var holdFlashlightFrames:Int = 0;
 
 var hideCameraButtonsUntilLeave:Bool = false;
+var hideMaskButtonUntilLeave:Bool = false;
+var hideCameraUntilRelease:Bool = false;
+var hideMaskUntilRelease:Bool = false;
 
 var nightNumber:Int;
 var nightTimer:Int = 0;
@@ -340,14 +341,10 @@ function create()
     office.addToState(this);
 
     if (FlxG.random.int(1, 100) == 1 && nightNumber == 7)
-    {
         paperpalAI = 1;
-    }
 
     office.goldenFreddyTweenDone = function()
-    {
         animManager.goldenFreddyCanKill = true;
-    };
 
     // uh oh
     office.freddyPlush.visible = SaveData.getBool('freddysCircusDone');
@@ -444,15 +441,18 @@ function create()
 
     add(cameraSystem.cameraBlip);
 
-    add(cameraButton.sprite);
-    add(maskButton.sprite);
+    if (!isMobile)
+    {
+        add(cameraButton.sprite);
+        add(maskButton.sprite);
+    }
 
     if (nightNumber == 1)
     {
-        holdFlashlightSprite = new FunkinSprite(39, 672, Paths.image('ui/tutorial$mobilePrefix'));
-        holdFlashlightSprite.alpha = 0.5;
+        holdFlashlightSprite = new FunkinSprite(39, 672, Paths.image('ui/tutorial$mobilePrefix'));        
         if (isMobile)
         {
+            holdFlashlightSprite.alpha = 0.5;
             holdFlashlightSprite.x = 390;
             holdFlashlightSprite.y = 300;
         }
@@ -480,111 +480,80 @@ function create()
     add(monitor.sprite);
     add(freddyMask.sprite);
 
+    if (isMobile)
+    {
+        add(cameraButton.sprite);
+        add(maskButton.sprite);
+    }
+
     add(cameraMap.musicBoxWarningHUD);
 
     var cameraPanelHovered:Bool = false;
 
-    cameraButton.onHover = function()
+    if (isMobile)
     {
-        if (dying) return;
-
-        if (blackoutActive) return;
-
-        if (monitor.isAnimating) return;
-
-        if (maskOn)
+        cameraButton.onClick = function()
         {
-            hideCameraButtonsUntilLeave = true;
-            pullMaskUp();
-            return;
-        }
+            hideCameraUntilRelease = true;
+            cameraButton.sprite.visible = false;
 
-        cameraPanelHovered = true;
-
-        if (monitor.isOpen)
-        {
-            dropCameras();
-        }
-        else
-        {
-            openingCams = true;
-
-            FlxG.sound.play(Paths.sound('cams up'));
-
-            if (shadowBonnieAppear)
+            if (monitor.isOpen)
             {
-                shadowBonnieAppear = false;
-                FlxTween.tween(shadowBonnie, {alpha: 0}, 1.13, {
-                    onComplete: function()
-                    {
-                        shadowBonnieAppear = false;
-                        shadowBonnie.visible = false;
-                    }
-                });
+                hideMaskUntilRelease = true;
+                maskButton.sprite.visible = false;
             }
 
-            monitor.onOpenFinished = function()
-            {
-                openingCams = false;
-                cameraSystem.setMonitorOpen(true);
+            cameraButtonFunc();
+        };
 
-                office.jj.visible = false;
-
-                if (isMobile)
-                {
-                    crosshair.setPosition(-260, -50);
-                    crosshairBox.setPosition(29, 93);
-                    holdFlashlightSprite.setPosition(129, 263);
-                }
-
-                if (cameraPanelHovered)
-                {
-                    maskButton.sprite.visible = false;
-                    cameraButton.sprite.visible = false;
-                }
-                else
-                {
-                    maskButton.sprite.visible = false;
-                    cameraButton.sprite.visible = true;
-                }
-
-                if (!cameraNoise.playing)
-                    cameraNoise.play();
-                else
-                    cameraNoise.volume = 1;
-
-                cameraSystem.setVisible(true);
-                cameraMap.setVisible(true);
-                cameraSystem.setHUDVisible(true);
-                cameraSystem.setCamera(cameraSystem.lastViewedCamera);
-                cameraMap.selectCamera(cameraSystem.lastViewedCamera);
-                
-                
-                FlxTween.cancelTweensOf(blackoutOverlay);
-                blackoutOverlay.alpha = 0;
-            };
-
-            monitor.open();
-            camFrozen = true;
-
-            hideCameraButtonsUntilLeave = false;
-        }
-    };
-
-    cameraButton.onLeave = function()
-    {
-        cameraPanelHovered = false;
-
-        if (hideCameraButtonsUntilLeave && !openingCams)
+        maskButton.onClick = function()
         {
-            maskButton.sprite.visible = true;
-            cameraButton.sprite.visible = true;
-            hideCameraButtonsUntilLeave = false;
-        }
-    };
+            hideMaskUntilRelease = true;
+            maskButton.sprite.visible = false;
 
-    var hideMaskButtonUntilLeave:Bool = false;
+            if (maskOn)
+                hideCameraUntilRelease = true;
 
+            if (monitor.isOpen)
+            {
+                hideCameraUntilRelease = true;
+                cameraButton.sprite.visible = false;
+            }
+
+            maskButtonFunc();
+        };
+    }
+    else
+    {
+        cameraButton.onHover = function()
+            cameraButtonFunc();
+
+        cameraButton.onLeave = function()
+        {
+            cameraPanelHovered = false;
+
+            if (hideCameraButtonsUntilLeave && !openingCams)
+            {
+                maskButton.sprite.visible = true;
+                cameraButton.sprite.visible = true;
+                hideCameraButtonsUntilLeave = false;
+            }
+        };
+
+        maskButton.onHover = function()
+            maskButtonFunc();
+
+        maskButton.onLeave = function()
+        {
+            if (hideMaskButtonUntilLeave)
+            {
+                maskButton.sprite.visible = true;
+                cameraButton.sprite.visible = true;
+                hideMaskButtonUntilLeave = false;
+            }
+        };
+    }
+    
     breathingSound = FlxG.sound.load(Paths.sound('breathing'), 0, true);
     breathingSound.play();
 
@@ -601,125 +570,6 @@ function create()
     maskUpSound = FlxG.sound.load(Paths.sound('mask up'), 1, false);
 
     garbledSound.play();
-
-    maskButton.onHover = function()
-    {
-        if (dying) return;
-
-        if (monitor.isOpen)
-        {
-            hideMaskButtonUntilLeave = true;
-            maskButton.sprite.visible = false;
-            cameraButton.sprite.visible = false;
-
-            dropCameras();
-            return;
-        }
-
-        if (maskLock && maskOn)
-            return;
-
-        if (maskOn)
-        {
-            maskOn = false;
-
-            maskUpSound?.stop();
-            maskUpSound?.play();
-
-            breathingSound.volume = 0;
-            freddyMask.takeOff();
-
-            freddyMask.onTakeOffComplete = function()
-            {
-                if (flashlight.battery > 0)
-                {
-                    flashlight.canFlicker = true;
-                    flashlight.text.visible = true;
-                }
-
-                if (isMobile)
-                    crosshair.visible = true;
-                nightSprite.visible = true;
-                nightNumberSprite.visible = true;
-                amSprite.visible = true;
-                hourOnes.visible = true;
-                if (currentHour == 12)
-                    hourTens.visible = true;
-                if (nightNumber == 1 && holdFlashlightFrames <= 100)
-                {
-                    if (isMobile)
-                        crosshairBox.visible = true;
-                    holdFlashlightSprite.visible = true;
-                }
-            };
-
-            hideMaskButtonUntilLeave = true;
-
-            if (blackoutMaskChanceActive)
-            {
-                blackoutMaskChanceActive = false;
-
-                triggerDeath();
-                return;
-            }
-
-            checkPendingJumpscare();
-            return;
-        }
-        
-        if (heldVent != null)
-        {
-            heldVent.turnOff();
-            heldVent = null;
-        }
-
-        maskOn = true;
-
-        maskDownSound?.stop();
-        maskDownSound?.play();
-
-        if (shadowBonnieAppear)
-        {
-            shadowBonnieAppear = false;
-            FlxTween.tween(shadowBonnie, {alpha: 0}, 1.13, {
-                onComplete: function()
-                {
-                    shadowBonnieAppear = false;
-                    shadowBonnie.visible = false;
-                }
-            });
-        }
-
-        maskDownSound.onComplete = function()
-        {
-            if (maskOn)
-                breathingSound.volume = 1;
-        };
-
-        freddyMask.putOn();
-        flashlight.canFlicker = false;
-        var sprites = [flashlight.sprite, flashlight.text, maskButton.sprite, cameraButton.sprite, nightSprite, nightNumberSprite, amSprite, hourOnes];
-        if (isMobile) sprites.push(crosshair);
-        for (sprite in sprites) sprite.visible = false;
-        if (currentHour == 12)
-            hourTens.visible = false;
-        if (nightNumber == 1)
-        {
-            holdFlashlightSprite.visible = false;
-            if (isMobile)
-                crosshairBox.visible = false;
-        }
-    };
-
-    maskButton.onLeave = function()
-    {
-        if (hideMaskButtonUntilLeave)
-        {
-            maskButton.sprite.visible = true;
-            cameraButton.sprite.visible = true;
-            hideMaskButtonUntilLeave = false;
-        }
-    };
 
     staticSound = FlxG.sound.load(Paths.sound('stare'), 0, true);
     staticSound.play(true);
@@ -753,7 +603,10 @@ function pullMaskUp()
         hourOnes.visible = true;
 
         if (isMobile)
+        {
             crosshair.visible = true;
+            maskButton.sprite.visible = true;
+        }
         if (nightNumber == 1 && holdFlashlightFrames <= 100)
         {
             if (isMobile)
@@ -777,8 +630,191 @@ function pullMaskUp()
     checkPendingJumpscare();
 }
 
-// 290 145
-// 390 300
+function cameraButtonFunc(){
+    if (dying || blackoutActive || monitor.isAnimating) return;
+
+    if (maskOn)
+    {
+        hideCameraButtonsUntilLeave = true;
+        pullMaskUp();
+        return;
+    }
+
+    cameraPanelHovered = true;
+
+    if (monitor.isOpen)
+    {
+        dropCameras();
+    }
+    else
+    {
+        openingCams = true;
+
+        maskButton.sprite.visible = false;
+
+        if (isMobile)
+            hideCameraButtonsUntilLeave = true;
+
+        FlxG.sound.play(Paths.sound('cams up'));
+
+        if (shadowBonnieAppear)
+        {
+            shadowBonnieAppear = false;
+            FlxTween.tween(shadowBonnie, {alpha: 0}, 1.13, {
+                onComplete: function()
+                {
+                    shadowBonnieAppear = false;
+                    shadowBonnie.visible = false;
+                }
+            });
+        }
+
+        monitor.onOpenFinished = function()
+        {
+            openingCams = false;
+            if (!isMobile)
+                cameraButton.sprite.visible = !cameraButton.isMouseOver(camHUD);
+            cameraSystem.setMonitorOpen(true);
+
+            office.jj.visible = false;
+
+            if (isMobile)
+            {
+                crosshair.setPosition(-260, -50);
+                crosshairBox.setPosition(29, 93);
+                holdFlashlightSprite.setPosition(129, 263);
+            }
+
+            if (!cameraNoise.playing)
+                cameraNoise.play();
+            else
+                cameraNoise.volume = 1;
+
+            cameraSystem.setVisible(true);
+            cameraMap.setVisible(true);
+            cameraSystem.setHUDVisible(true);
+            cameraSystem.setCamera(cameraSystem.lastViewedCamera);
+            cameraMap.selectCamera(cameraSystem.lastViewedCamera);
+                
+            FlxTween.cancelTweensOf(blackoutOverlay);
+            blackoutOverlay.alpha = 0;
+        };
+
+        monitor.open();
+        camFrozen = true;
+
+        hideCameraButtonsUntilLeave = false;
+    }
+}
+
+function maskButtonFunc(){
+    if (dying) return;
+
+    if (monitor.isOpen)
+    {
+        hideMaskButtonUntilLeave = true;
+        maskButton.sprite.visible = false;
+        cameraButton.sprite.visible = false;
+
+        dropCameras();
+        return;
+    }
+
+    if (maskLock && maskOn)
+        return;
+
+    if (maskOn)
+    {
+        maskOn = false;
+
+        maskUpSound?.stop();
+        maskUpSound?.play();
+
+        breathingSound.volume = 0;
+        freddyMask.takeOff();
+
+        freddyMask.onTakeOffComplete = function()
+        {
+            if (flashlight.battery > 0)
+            {
+                flashlight.canFlicker = true;
+                flashlight.text.visible = true;
+            }
+
+            if (isMobile)
+                crosshair.visible = true;
+            nightSprite.visible = true;
+            nightNumberSprite.visible = true;
+            amSprite.visible = true;
+            hourOnes.visible = true;
+            if (currentHour == 12)
+                hourTens.visible = true;
+            if (nightNumber == 1 && holdFlashlightFrames <= 100)
+            {
+                if (isMobile)
+                    crosshairBox.visible = true;
+                holdFlashlightSprite.visible = true;
+            }
+        };
+
+        hideMaskButtonUntilLeave = true;
+
+        if (blackoutMaskChanceActive)
+        {
+            blackoutMaskChanceActive = false;
+
+            triggerDeath();
+            return;
+        }
+
+        checkPendingJumpscare();
+        return;
+    }
+        
+    if (heldVent != null)
+    {
+        heldVent.turnOff();
+        heldVent = null;
+    }
+
+    maskOn = true;
+
+    maskDownSound?.stop();
+    maskDownSound?.play();
+
+    if (shadowBonnieAppear)
+    {
+        shadowBonnieAppear = false;
+        FlxTween.tween(shadowBonnie, {alpha: 0}, 1.13, {
+            onComplete: function()
+            {
+                shadowBonnieAppear = false;
+                shadowBonnie.visible = false;
+            }
+        });
+    }
+
+    maskDownSound.onComplete = function()
+    {
+        if (maskOn)
+            breathingSound.volume = 1;
+    };
+
+    freddyMask.putOn();
+    flashlight.canFlicker = false;
+    var sprites = [flashlight.sprite, flashlight.text, maskButton.sprite, cameraButton.sprite, nightSprite, nightNumberSprite, amSprite, hourOnes];
+    if (isMobile) sprites.push(crosshair);
+    for (sprite in sprites) sprite.visible = false;
+    if (currentHour == 12)
+        hourTens.visible = false;
+    if (nightNumber == 1)
+    {
+        holdFlashlightSprite.visible = false;
+        if (isMobile)
+            crosshairBox.visible = false;
+    }
+}
+
 function dropCameras(forced:Bool = false)
 {
     if (!monitor.isOpen)
@@ -1385,27 +1421,42 @@ function playMangleSound()
         garbledSound.volume = 0;    
 }
 
+
 function updateCamera(elapsed:Float)
-{   
+{
     if (camFrozen) return;
 
     var mouseX = FlxG.mouse.screenX;
     var centerX = FlxG.width / 2;
-    var mouseOffset = mouseX - centerX;
     var moveSpeed:Float = 0;
 
-    if (Math.abs(mouseOffset) > deadZone)
+    if (isMobile)
     {
-        var distance = Math.abs(mouseOffset) - deadZone;
-        var strength = distance / (centerX - deadZone);
-        strength *= 2;
-        strength = FlxMath.bound(strength, 0, 1);
-        moveSpeed = FlxMath.signOf(mouseOffset) * strength * camSpeed;
+        if (!FlxG.mouse.pressed)
+            return;
+
+        camSpeed = 1000;
+
+        moveSpeed = mouseX < centerX ? -camSpeed : camSpeed;
+    }
+    else
+    {
+        var mouseOffset = mouseX - centerX;
+
+        if (Math.abs(mouseOffset) > deadZone)
+        {
+            var distance = Math.abs(mouseOffset) - deadZone;
+            var strength = distance / (centerX - deadZone);
+            strength *= 2;
+            strength = FlxMath.bound(strength, 0, 1);
+            moveSpeed = FlxMath.signOf(mouseOffset) * strength * camSpeed;
+        }
     }
 
     camWorld.scroll.x += moveSpeed * elapsed;
     camWorld.scroll.x = FlxMath.bound(camWorld.scroll.x, camBaseX - camRangeX, camBaseX + camRangeX);
 }
+
 
 var monitorScroll:Float = 0;
 var wasUnscrollable:Bool = false;
@@ -1688,6 +1739,21 @@ function update(elapsed:Float)
                 triggerDeath(anim);
                 dropCameras();
             }
+        }
+    }
+
+    if (isMobile && FlxG.mouse.justReleased)
+    {
+        if (hideCameraUntilRelease)
+        {
+            hideCameraUntilRelease = false;
+            cameraButton.sprite.visible = !maskOn;
+        }
+
+        if (hideMaskUntilRelease)
+        {
+            hideMaskUntilRelease = false;
+            maskButton.sprite.visible = !monitor.isOpen;
         }
     }
 

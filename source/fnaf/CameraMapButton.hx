@@ -16,10 +16,19 @@ class CameraMapButton
         button.animation.addByPrefix('gray', 'gray');
         button.animation.addByPrefix('green', 'green');
 
-        label = new FunkinSprite(x, y, Paths.image('cameras/buttons/' + id));
+        var imagePath = 'cameras/buttons/' + id;
+
+        if (isMobile && Assets.exists('images/' + imagePath + '_mobile.png'))
+            imagePath += '_mobile';
+
+        label = new FunkinSprite(x, y, Paths.image(imagePath));
         label.antialiasing = false;
 
-        label.x += 7;
+        if ((id == 'cam03' || id == 'cam01' || id == 'cam05') && isMobile)
+            label.x += 23;
+        else
+            label.x += 7;
+
         label.y += 7;
     }
 
