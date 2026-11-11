@@ -1,8 +1,8 @@
 var image:Int = 1;
 var graphics:Array<String> = [
-    'salary1',
+    'salary1$mobilePrefix',
     'salary2',
-    'termination'
+    'termination$mobilePrefix'
 ];
 
 var theImage:FunkinSprite;

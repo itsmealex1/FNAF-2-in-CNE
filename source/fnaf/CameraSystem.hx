@@ -107,12 +107,10 @@ class CameraSystem
         {
             var id = 'cam' + StringTools.lpad(Std.string(i), '0', 2);
 
-            var atlas = Paths.getSparrowAtlas('cameras/' + id);
+            var atlas = getCameraAtlas(id);
 
             if (atlas == null)
-            {
                 continue;
-            }
 
             var sprite = new FunkinSprite();
             sprite.antialiasing = true;
@@ -209,8 +207,18 @@ class CameraSystem
     }
 
     public function setWindUpBox(box:WindUpBox)
-    {
         windUpBox = box;
+
+    function getCameraAtlas(id:String)
+    {
+        #if mobile
+        var mobileAtlas = Paths.getSparrowAtlas('cameras/' + id + '_mobile');
+
+        if (mobileAtlas != null)
+            return mobileAtlas;
+        #end
+
+        return Paths.getSparrowAtlas('cameras/' + id);
     }
 
     function getEntityPrefix(entities:Array<String>, cam:FunkinSprite)

@@ -235,6 +235,8 @@ function create()
     camBaseX = camWorld.scroll.x;
     camBaseY = camWorld.scroll.y;
 
+    camWorld.scroll.x = -288;
+
     camMonitor = new FlxCamera();
     camMonitor.bgColor = 0x000000;
     FlxG.cameras.add(camMonitor);

@@ -57,6 +57,7 @@ class FreddyMask
         if (!isOn) return;
 
         isOn = false;
+        floating = false;
 
         sprite.animation.play('up');
         sprite.screenCenter();
@@ -76,10 +77,10 @@ class FreddyMask
 
     public function update(elapsed:Float)
     {
+        floatTime += elapsed * 1.3;
+
         if (!floating || !isOn)
             return;
-
-        floatTime += elapsed * 1.3;
 
         sprite.x = centerX + Math.sin(floatTime) * radiusX;
         sprite.y = centerY + Math.sin(floatTime * 2) * radiusY;

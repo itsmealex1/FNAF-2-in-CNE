@@ -174,7 +174,7 @@ function create()
     nightNumberSprite.visible = false;
     add(nightNumberSprite);
 
-    news = new FunkinSprite(0, 0, Paths.image('news'));
+    news = new FunkinSprite(0, 0, Paths.image('news$mobilePrefix'));
     news.antialiasing = true;
     news.alpha = 0;
     add(news);
