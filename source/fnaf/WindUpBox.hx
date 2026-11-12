@@ -44,6 +44,17 @@ class WindUpBox
         circle.visible = false;
 
         windSound = FlxG.sound.load(Paths.sound('windup2'), 1, false);
+
+        if (isMobile)
+        {
+            for (spr in [sprite, text, clickAndHold, circle])
+                spr.x -= 250;
+
+            circle.scale.set(1.5, 1.5);
+
+            circle.x += 245;
+            circle.y -= 5;
+        }
     }
 
     public function setCamera(cam:FlxCamera)

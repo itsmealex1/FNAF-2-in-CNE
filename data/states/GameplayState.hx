@@ -1420,7 +1420,6 @@ function playMangleSound()
         garbledSound.volume = 0;    
 }
 
-
 function updateCamera(elapsed:Float)
 {
     if (camFrozen) return;
@@ -1434,9 +1433,21 @@ function updateCamera(elapsed:Float)
         if (!FlxG.mouse.pressed)
             return;
 
+        if (crosshairBox != null && CoolUtil.mouseOverlaps(crosshairBox, camHUD))
+            return;
+
         camSpeed = 1000;
 
-        moveSpeed = mouseX < centerX ? -camSpeed : camSpeed;
+        var mouseOffset = mouseX - centerX;
+
+        if (Math.abs(mouseOffset) > deadZone)
+        {
+            var distance = Math.abs(mouseOffset) - deadZone;
+            var strength = distance / (centerX - deadZone);
+            strength = FlxMath.bound(strength, 0, 1);
+
+            moveSpeed = FlxMath.signOf(mouseOffset) * strength * camSpeed;
+        }
     }
     else
     {
@@ -1455,7 +1466,6 @@ function updateCamera(elapsed:Float)
     camWorld.scroll.x += moveSpeed * elapsed;
     camWorld.scroll.x = FlxMath.bound(camWorld.scroll.x, camBaseX - camRangeX, camBaseX + camRangeX);
 }
-
 
 var monitorScroll:Float = 0;
 var wasUnscrollable:Bool = false;

@@ -6,7 +6,7 @@ import flixel.system.scaleModes.FillScaleMode;
 import funkin.backend.utils.DiscordUtil;
 
 var fillMode:Bool = true;
-public static var isMobile:Bool = true;
+public static var isMobile:Bool = #if mobile true #else false #end;
 public static var mobilePrefix:String = isMobile ? '_mobile' : '';
 
 // SCRIPT BY CHRONIC
