@@ -679,7 +679,8 @@ function cameraButtonFunc(){
             {
                 crosshair.setPosition(-260, -50);
                 crosshairBox.setPosition(29, 93);
-                holdFlashlightSprite.setPosition(129, 263);
+                if (nightNumber == 1)
+                    holdFlashlightSprite.setPosition(129, 263);
             }
 
             if (!cameraNoise.playing)
