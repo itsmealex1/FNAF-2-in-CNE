@@ -462,13 +462,10 @@ function create()
 
     if (isMobile)
     {
-        if (nightNumber == 1)
-        {
-            crosshairBox = new FunkinSprite(290, 145).makeSolid(401, 401, FlxColor.WHITE);
-            crosshairBox.alpha = 0.2;
-            crosshairBox.camera = camHUD;
-            add(crosshairBox);
-        }
+        crosshairBox = new FunkinSprite(290, 145).makeSolid(401, 401, FlxColor.WHITE);
+        crosshairBox.alpha = nightNumber == 1 ? 0.2 : 0;
+        crosshairBox.camera = camHUD;
+        add(crosshairBox);
 
         crosshair = new FunkinSprite(0, 0, Paths.image('ui/crosshair'));
         crosshair.alpha = 0.5;
