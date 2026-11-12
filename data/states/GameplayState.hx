@@ -837,7 +837,8 @@ function dropCameras(forced:Bool = false)
     {
         crosshair.screenCenter();
         crosshairBox.setPosition(290, 145);
-        holdFlashlightSprite.setPosition(390, 300);
+        if (nightNumber == 1)
+            holdFlashlightSprite.setPosition(390, 300);
     }
 
     if (FlxG.random.int(1, 1000) == 1)
