@@ -212,7 +212,7 @@ function update(elapsed:Float)
 {
     if (FlxG.keys.justPressed.ENTER || FlxG.mouse.justPressed && selectedNewGame && canSkip)
     {
-        transitionTmr.cancel();
+        transitionTmr?.cancel();
 
         FlxG.camera.fade(FlxColor.BLACK, 1, false, function()
         {
