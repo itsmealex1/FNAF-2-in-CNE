@@ -57,7 +57,7 @@ var deleteFrames:Int;
 
 var camButtons:FlxCamera;
 
-var perspShader:FunkinShader = FunkinShader.fromFile('perspective');
+var perspShader:CustomShader = new CustomShader('perspective');
 
 function create()
 {
@@ -477,7 +477,7 @@ function update(elapsed:Float)
                     case 'perspectiveEffect':
                         SaveData.setMobileBool('perspectiveEffect', button.enabled);
                         SaveData.saveMobile();
-                        camera.addShader(button.enabled ? FunkinShader.fromFile('perspective') : null);
+                        camera.addShader(button.enabled ? new CustomShader('perspective') : null);
                     case 'displayMode':
                         SaveData.setMobileBool('displayMode', button.enabled);
                         SaveData.saveMobile();
