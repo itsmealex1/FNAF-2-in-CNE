@@ -356,7 +356,7 @@ function update(elapsed:Float)
     {
         transitionTmr?.cancel();
 
-        FlxG.camera.fade(FlxColor.BLACK, 1, false, function()
+        camButtons.fade(FlxColor.BLACK, 1, false, function()
         {
             FlxG.sound.music.stop();
             FlxG.switchState(new ModState("NightState"));
@@ -510,7 +510,7 @@ function transition()
 
     transitionTmr = new FlxTimer().start(6, function()
     {
-        FlxG.camera.fade(FlxColor.BLACK, 1, false, function()
+        camButtons.fade(FlxColor.BLACK, 1, false, function()
         {
             canSkip = false;
 
