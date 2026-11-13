@@ -1214,7 +1214,11 @@ function triggerDeath(anim:Animatronic = null)
 
     jumpscare = new Jumpscare(anim.name);
     jumpscare.camera = camHUD;
-    insert(members.indexOf(monitor.sprite), jumpscare);
+    if (!isMobile)
+        insert(members.indexOf(monitor.sprite), jumpscare);
+    else
+        for (obj in [cameraButton.sprite, maskButton.sprite])
+            insert(members.indexOf(obj)+1, jumpscare);
 
     jumpscare.start();
 }
