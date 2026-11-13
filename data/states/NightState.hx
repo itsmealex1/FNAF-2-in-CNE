@@ -41,9 +41,7 @@ function create()
     cameraBlip.animation.finishCallback = function(name:String)
     {
         if (name == 'blip')
-        {
             cameraBlip.visible = false;
-        }
     };
 
     nightDisplay = new FunkinSprite(395, 316, Paths.image('title/night/' + nightNumber));

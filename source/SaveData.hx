@@ -8,7 +8,10 @@ using StringTools;
 class SaveData
 {
     public static var path:String = '${Paths.getAssetsRoot()}/data/save.txt';
+    public static var pathMobile:String = '${Paths.getAssetsRoot()}/data/save_mobile.txt';
+
     private static var data:StringMap<String> = new StringMap();
+    private static var dataMobile:StringMap<String> = new StringMap();
 
     // you know what i hate THE FUCKING SAVE TEXT DOESN'T FOLLOW THE ORDER OF THIS
     private static var defaults = {
@@ -28,6 +31,11 @@ class SaveData
         fazbearFeverDone: 'false',
         goldenFreddyDone: 'false',
         firstDreamState: 'true'
+    };
+
+    private static var defaultsMobile = {
+        displayMode: 'true', // true is full, false is 4:3
+        perspectiveEffect: 'true'
     };
 
     public static function createDefault():Void
@@ -71,6 +79,70 @@ class SaveData
         }
     }
 
+    public static function loadMobile():Void
+    {
+        if (!isMobile)
+            return;
+
+        if (!FileSystem.exists(pathMobile))
+        {
+            dataMobile = new StringMap();
+
+            for (key in Reflect.fields(defaultsMobile))
+                dataMobile.set(key, Reflect.field(defaultsMobile, key));
+
+            saveMobile();
+            return;
+        }
+
+        dataMobile = new StringMap();
+
+        for (key in Reflect.fields(defaultsMobile))
+            dataMobile.set(key, Reflect.field(defaultsMobile, key));
+
+        var fileContent:String = File.getContent(pathMobile);
+
+        for (line in fileContent.split('\n'))
+        {
+            line = line.trim();
+
+            if (line == '')
+                continue;
+
+            var separator:Int = line.indexOf('=');
+
+            if (separator <= 0)
+                continue;
+
+            var key:String = line.substring(0, separator).trim();
+            var value:String = line.substring(separator + 1).trim();
+
+            dataMobile.set(key, value);
+        }   
+    }
+
+    public static function getMobile(key:String, defaultValue:String = ''):String
+        return dataMobile.exists(key) ? dataMobile.get(key) : defaultValue;
+
+    public static function getMobileBool(key:String, defaultValue:Bool = false):Bool
+    {    
+        var value = getMobile(key, Std.string(defaultValue)).toLowerCase();
+
+        if (value == 'true')
+            return true;
+
+        if (value == 'false')
+            return false;
+
+        return defaultValue;
+    }
+
+    public static function setMobile(key:String, value:String):Void
+        dataMobile.set(key, value);
+
+    public static function setMobileBool(key:String, value:Bool):Void
+        setMobile(key, Std.string(value));
+
     public static function get(key:String, defaultValue:String = ''):String
         return data.exists(key) ? data.get(key) : defaultValue;
 
@@ -113,7 +185,23 @@ class SaveData
         }
 
         File.saveContent(path, output.join('\n'));
-    }   
+    } 
+    
+    public static function saveMobile():Void
+    {
+        if (!isMobile)
+            return;
+
+        var output:Array<String> = [];
+
+        for (key in Reflect.fields(defaultsMobile))
+        {
+            var value = dataMobile.exists(key) ? dataMobile.get(key) : Reflect.field(defaultsMobile, key);
+            output.push(key + '=' + value);
+        }
+
+        File.saveContent(pathMobile, output.join('\n'));
+    }
 
     public static function reset():Void
     {

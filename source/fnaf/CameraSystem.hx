@@ -1,6 +1,7 @@
 import fnaf.AnimatronicManager;
 import fnaf.CameraMapButton;
 import flixel.effects.FlxFlicker;
+import SaveData;
 
 using StringTools;
 
@@ -95,6 +96,8 @@ class CameraSystem
 
     public function new()
     {
+        SaveData.loadMobile();
+        
         cameras = [];
         cameraIDs = [];
         cameraHUD = [];
@@ -203,7 +206,8 @@ class CameraSystem
         camLine2.camera = perspectiveCamera;
         camLine3.camera = perspectiveCamera;
 
-        perspectiveCamera.addShader(new CustomShader('perspective'));
+        if (SaveData.getMobileBool('perspectiveEffect', true))
+            perspectiveCamera.addShader(new CustomShader('perspective'));
     }
 
     public function setWindUpBox(box:WindUpBox)

@@ -206,6 +206,7 @@ var paperpalPosition:Int = 0;
 function create()
 {
     SaveData.load();
+    SaveData.loadMobile();
 
     if (data != null)
     {
@@ -570,6 +571,10 @@ function create()
 
     staticSound = FlxG.sound.load(Paths.sound('stare'), 0, true);
     staticSound.play(true);
+
+    if (isMobile && SaveData.getMobileBool('perspectiveEffect', true) == false){
+        return;
+    }
 
     camWorld.addShader(new CustomShader('perspective'));
     camMonitor.addShader(new CustomShader('perspective'));
@@ -1437,10 +1442,15 @@ function updateCamera(elapsed:Float)
         if (!FlxG.mouse.pressed)
             return;
 
-        if (crosshairBox != null && CoolUtil.mouseOverlaps(crosshairBox, camHUD))
-            return;
+        var excludedItems = [maskButton.sprite, cameraButton.sprite, crosshairBox];
 
-        camSpeed = 1000;
+        for (item in excludedItems)
+        {
+            if (CoolUtil.mouseOverlaps(item, camHUD))
+                return;
+        }
+        
+        camSpeed = 1550;
 
         var mouseOffset = mouseX - centerX;
 
@@ -1448,6 +1458,7 @@ function updateCamera(elapsed:Float)
         {
             var distance = Math.abs(mouseOffset) - deadZone;
             var strength = distance / (centerX - deadZone);
+            strength *= 1.5;
             strength = FlxMath.bound(strength, 0, 1);
 
             moveSpeed = FlxMath.signOf(mouseOffset) * strength * camSpeed;
@@ -1677,7 +1688,8 @@ function update(elapsed:Float)
             if (holdFlashlightFrames >= 100)
             {
                 holdFlashlightSprite.visible = false;
-                crosshairBox.visible = false;
+                if (isMobile)
+                    crosshairBox.visible = false;
             }
         }
     }

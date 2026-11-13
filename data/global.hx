@@ -3,18 +3,21 @@ import openfl.system.Capabilities;
 import funkin.backend.MusicBeatState;
 import funkin.backend.system.framerate.Framerate;
 import flixel.system.scaleModes.FillScaleMode;
+import flixel.system.scaleModes.StageSizeScaleMode;
 import funkin.backend.utils.DiscordUtil;
+import SaveData;
 
-var fillMode:Bool = true;
 public static var isMobile:Bool = #if mobile true #else false #end;
 public static var mobilePrefix:String = isMobile ? '_mobile' : '';
 
 // SCRIPT BY CHRONIC
 function new() {
-    if (fillMode)
+    SaveData.loadMobile();
+
+    if (SaveData.getMobileBool('displayMode', true) == true)
         FlxG.scaleMode = new FillScaleMode();
 
-    FlxG.fullscreen = fillMode;
+    FlxG.fullscreen = true;
     Framerate.debugMode = 0;
 
     windowShit(1024, 768, 0.715);
