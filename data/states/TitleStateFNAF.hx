@@ -22,6 +22,8 @@ var night:FunkinSprite;
 var nightNumberSprite:FunkinSprite;
 var nightText:FunkinText;
 
+var modsTxt:FunkinText;
+
 var firstStar:FunkinSprite;
 var secondStar:FunkinSprite;
 var thirdStar:FunkinSprite;
@@ -237,6 +239,14 @@ function create()
         add(copyrightTxt);
     }
 
+    if (isMobile)
+    {
+        modsTxt = new FunkinText(850, 42, FlxG.width, 'Mods');
+        modsTxt.setFormat(Paths.font('ocra.ttf'), 48);
+        modsTxt.camera = camButtons;
+        add(modsTxt);
+    }
+
     arrow = new FunkinSprite(33, 439, Paths.image('title/arrow'));
     arrow.visible = false;
     arrow.antialiasing = true;
@@ -317,11 +327,11 @@ function showMenu(menu:String)
 
     if (isMobile)
     {
-        for (mainObj in [nightText, title, firstStar, secondStar, thirdStar, versionTxt, copyrightTxt])
+        for (mainObj in [nightText, title, firstStar, secondStar, thirdStar, versionTxt, copyrightTxt, modsTxt])
             mainObj.visible = currentMenu == 'main';
     }
 
-    arrow.visible = false;
+    arrow.visible = !isMobile;
     lastHovered = null;
 }
 
@@ -366,7 +376,7 @@ function update(elapsed:Float)
     if (!canSelect)
         return;
 
-    if (controls.SWITCHMOD)
+    if (controls.SWITCHMOD || (isMobile && modsTxt.visible && CoolUtil.mouseOverlaps(modsTxt, camButtons) && FlxG.mouse.justPressed))
     {
         openSubState(new ModSwitchMenu());
         persistentUpdate = false;
@@ -426,7 +436,7 @@ function update(elapsed:Float)
             arrow.x = hovered.sprite.x - arrow.width - 10;
         }
 
-        arrow.visible = hovered != null;
+        arrow.visible = !isMobile || hovered != null;
         lastHovered = hovered;
     }
 
