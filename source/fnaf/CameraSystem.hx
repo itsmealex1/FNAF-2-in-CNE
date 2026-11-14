@@ -129,7 +129,7 @@ class CameraSystem
         }
 
         mangleOverlay = new FunkinSprite();
-        mangleOverlay.antialiasig = true;
+        mangleOverlay.antialiasing = true;
         mangleOverlay.visible = false;
 
         camStatic = new FunkinSprite();
